@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
 
-def Importer(object):
+class Importer(object):
     __metaclass__ = ABCMeta
 
     @abstractmethod
