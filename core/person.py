@@ -8,7 +8,7 @@ class MatchingFlags(Flag):
 
 
 class Person(object):
-    def __init__(self, name, number, flags=MatchingFlags.no_flags, email=None, phone=None):
+    def __init__(self, name, number, flags=MatchingFlags.no_flags, email=None, phone=None, interested_in=set()):
         if not email and not phone:
             raise RuntimeError('%s has no email or phone' % name)
 
@@ -19,7 +19,7 @@ class Person(object):
         self._email = email
         self._phone = phone
         self._flags = flags
-        self._interested_in = set()
+        self._interested_in = interested_in
         self._matches = set()
 
     @property
@@ -50,15 +50,6 @@ class Person(object):
     @property
     def matches(self):
         return self._matches
-
-    def add_interest(self, person):
-        if not type(person) is Person:
-            raise TypeError('Can only match a person')
-
-        self._interested_in.add(person)
-
-    def clear_interests(self):
-        self._interested_in.clear()
 
     @property
     def interested_in(self):
