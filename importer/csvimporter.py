@@ -42,9 +42,9 @@ class CsvImporter(Importer):
             interested_in.add(int(interest))
 
         if match_all:
-            flags = MatchingFlags.no_flags
-        else:
             flags = MatchingFlags.match_all
+        else:
+            flags = MatchingFlags.no_flags
 
-        person = Person(number=nr, name=name, email=email, phone=phone, flags=flags, interested_in=interested_in)
+        person = Person(number=nr, name=name, email=email, phone=phone, flags=flags, marked_numbers=interested_in)
         return person

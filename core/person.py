@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from aenum import Flag
+from core.results import Results
 
 
 class MatchingFlags(Flag):
@@ -8,19 +9,28 @@ class MatchingFlags(Flag):
 
 
 class Person(object):
-    def __init__(self, name, number, flags=MatchingFlags.no_flags, email=None, phone=None, interested_in=set()):
+    def __init__(self, name, number, marked_numbers, flags=MatchingFlags.no_flags, email=None, phone=None):
         if not email and not phone:
             raise RuntimeError('%s has no email or phone' % name)
 
         if type(flags) is not MatchingFlags:
             raise TypeError('Must use MatchingOptions')
 
+        if type(marked_numbers) is not set:
+            raise TypeError('marked_numbers must be a set')
+
+        self._number = number
         self._name = name
         self._email = email
         self._phone = phone
         self._flags = flags
-        self._interested_in = interested_in
+        self._marked_numbers = marked_numbers
         self._matches = set()
+        self._results = Results()
+
+    @property
+    def number(self):
+        return self._number
 
     @property
     def name(self):
@@ -35,26 +45,20 @@ class Person(object):
         return self._phone
 
     @property
-    def match_all(self):
-        return self._match_all
-
-    def add_match(self, person):
-        if not type(person) is Person:
-            raise TypeError('Can only match a person')
-
-        self.matches.add(person)
-
-    def clear_matches(self):
-        self.matches.clear()
-
-    @property
     def matches(self):
         return self._matches
 
     @property
-    def interested_in(self):
-        return self._interested_in
+    def marked_numbers(self):
+        return self._marked_numbers
 
     @property
     def flags(self):
         return self._flags
+
+    @property
+    def results(self):
+        return self._results
+
+    def __repr__(self):
+        return 'Person (name: %s, number: %s, marked_numbers: %s)' % (self._name, self._number, self._marked_numbers)

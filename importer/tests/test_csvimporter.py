@@ -1,5 +1,6 @@
 import pytest
 from importer.csvimporter import CsvImporter
+from core.person import MatchingFlags
 
 
 @pytest.fixture
@@ -43,7 +44,15 @@ def test_importing_correct_csv_data_works(correct_csv_file):
     data = importer.import_data()
 
     assert len(data) == 5
-    assert data[0].name == 'Tobi'
+    person = data[0]
+    assert person.name == 'Tobi'
+    assert person.email == 'tobi@gmail.com'
+    assert person.phone == '123456789'
+    assert person.number == 1
+    assert person.flags == MatchingFlags.no_flags
+    assert person.marked_numbers == set([2, 3])
+    person = data[1]
+    assert person.flags == MatchingFlags.match_all
 
 
 def test_importing_csv_file_without_header_raises_error(csv_file_without_header):

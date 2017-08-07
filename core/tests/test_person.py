@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-import pytest
 from core.person import Person, MatchingFlags
 
 
 def test_if_person_has_no_name_or_phone_raise_error():
     try:
-        Person(name='Joe', number=14)
+        Person(name='Joe', number=14, marked_numbers=set())
         assert False
     except RuntimeError:
         assert True
@@ -13,36 +12,21 @@ def test_if_person_has_no_name_or_phone_raise_error():
 
 def test_passing_non_flag_to_flags_raises_error():
     try:
-        Person(name='Samuel', number=20, phone='123', flags=None)
+        Person(name='Samuel', number=20, phone='123', flags=None, marked_numbers=set())
         assert False, 'should not accept flags'
     except TypeError:
         assert True
 
 
 def test_passing_valid_flag_works():
-    person = Person(name='Deere', number=10, phone='911', flags=MatchingFlags.match_all)
+    person = Person(name='Deere', number=10, phone='911', flags=MatchingFlags.match_all, marked_numbers=set())
 
     assert MatchingFlags.match_all in person.flags
 
 
-@pytest.fixture
-def person():
-    return Person(name='John', number=1, phone='144', email='franz@fritz.at')
-
-
-def test_adding_person_as_match_works(person):
-    other = Person(name='Sepp', number=2, phone='133')
-
-    person.add_match(other)
-
-    assert other in person.matches
-
-
-def test_adding_something_other_than_person_as_match_fails(person):
-    other = object()
-
+def test_passing_something_other_than_set_as_marked_numbers_raises_error():
     try:
-        person.add_match(other)
+        Person(name='Foo', number=1, phone='123457', marked_numbers=[1, 2, 3])
         assert False
     except TypeError:
         assert True
