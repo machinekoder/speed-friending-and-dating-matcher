@@ -1,0 +1,5 @@
+#
+# Runtime requirements
+#
+
+aenum>=1.4.5
