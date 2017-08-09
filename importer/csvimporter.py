@@ -14,7 +14,7 @@ class CsvImporter(Importer):
     def _read_and_verify_file(self, filename):
         people = []
 
-        with open(filename, 'rb') as f:
+        with open(filename, 'rt') as f:
             csvreader = csv.DictReader(f, delimiter=';')
 
             for row in csvreader:
