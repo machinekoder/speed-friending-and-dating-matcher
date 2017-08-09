@@ -1,5 +1,4 @@
-from exporter import Exporter
-from core.person import Person
+from .exporter import Exporter
 
 
 TEXT_TEMPLATE = '''
