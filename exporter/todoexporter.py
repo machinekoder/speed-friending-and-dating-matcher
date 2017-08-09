@@ -59,3 +59,6 @@ class TodoExporter(Exporter):
         if person.phone is not '':
             data.append(person.phone)
         return ', '.join(data)
+
+
+exporter = TodoExporter

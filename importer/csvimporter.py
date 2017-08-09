@@ -48,3 +48,6 @@ class CsvImporter(Importer):
 
         person = Person(number=nr, name=name, email=email, phone=phone, flags=flags, marked_numbers=interested_in)
         return person
+
+
+importer = CsvImporter
