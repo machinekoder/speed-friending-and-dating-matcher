@@ -30,5 +30,14 @@ For example:
 ./speed-friending-matcher.py -i csv:example/sample.csv -o todo:test.txt
 ```
 
+## Importer Plugins
+
+* csv:<filename>.csv: imports a CSV file with partipants data
+
+## Exporter Plugins
+
+* todo:<filename>.txt: exports a TODO file
+* onexlsx:<filename>.xlsx: exports a single Excel sheet containing matching information
+
 ## Extending the software
 You can extend the software by adding new import and export plugins. Take a look the default plugins [csvimporter](./importer/csvimporter.py) and [todoexporter](./exporter/todoexporter.py) for more details.
