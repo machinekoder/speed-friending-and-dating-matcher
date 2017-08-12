@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import pytest
-import people_testdata
+from . import people_testdata
 from openpyxl import load_workbook
 
 
