@@ -10,9 +10,6 @@ class MatchingFlags(Flag):
 
 class Person(object):
     def __init__(self, name, number, marked_numbers, flags=MatchingFlags.no_flags, email=None, phone=None):
-        if not email and not phone:
-            raise RuntimeError('%s has no email or phone' % name)
-
         if type(flags) is not MatchingFlags:
             raise TypeError('Must use MatchingOptions')
 

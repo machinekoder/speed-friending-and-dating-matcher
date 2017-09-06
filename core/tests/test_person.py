@@ -2,12 +2,12 @@
 from core.person import Person, MatchingFlags
 
 
-def test_if_person_has_no_name_or_phone_raise_error():
+def test_if_person_has_no_name_or_phone_do_not_raise_error():
     try:
         Person(name='Joe', number=14, marked_numbers=set())
-        assert False
-    except RuntimeError:
         assert True
+    except RuntimeError:
+        assert False
 
 
 def test_passing_non_flag_to_flags_raises_error():
