@@ -51,4 +51,4 @@ def test_writing_output_to_file_works_as_expected(testdata, exporter, expected_o
 
     with open(exporter._filename, 'rt') as todo_file:
         written = todo_file.read()
-        assert expected_output in written
+        assert written.startswith(expected_output)

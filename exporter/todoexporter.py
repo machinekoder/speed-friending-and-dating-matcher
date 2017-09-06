@@ -36,14 +36,16 @@ class TodoExporter(Exporter):
         todo_file.write(self._create_person_todo_string(person))
 
     def _create_person_todo_string(self, person):
+        def sort(results):
+            return sorted(results, key=lambda x: x.number)
         marked_by_me = []
-        for p in person.results.marked_by_me:
+        for p in sort(person.results.marked_by_me):
             marked_by_me.append(self._create_person_simple_string(p))
         marked_me = []
-        for p in person.results.marked_me:
+        for p in sort(person.results.marked_me):
             marked_me.append(self._create_person_simple_string(p))
         matches = []
-        for p in person.results.matches:
+        for p in sort(person.results.matches):
             matches.append(self._create_person_simple_string(p))
         return TEXT_TEMPLATE % {'name': person.name, 'email': person.email, 'phone': person.phone,
                                 'marked': '\n'.join(marked_by_me), 'got_marked': '\n'.join(marked_me),
