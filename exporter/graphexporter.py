@@ -18,6 +18,8 @@ class GraphExporter(Exporter):
                 edges.add(frozenset([person.name, match.name]))
 
         for source, target in edges:
+            source = source.decode('utf-8') if isinstance(source, bytes) else source
+            target = target.decode('utf-8') if isinstance(target, bytes) else target
             edge = pydot.Edge(source, target)
             graph.add_edge(edge)
 
