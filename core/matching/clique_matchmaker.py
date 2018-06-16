@@ -38,4 +38,4 @@ class CliqueMatchmaker(SimpleMatchmaker):
         matches = dfs(self._graph, person)
         matches.remove(person)
 
-        person.results.matches = matches
+        person.results.clique = matches
