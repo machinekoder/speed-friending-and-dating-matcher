@@ -20,11 +20,8 @@ def test_parsing_correct_input_plugin_string_works(dummy_app):
 def test_parsing_broken_input_plugin_string_raises_runtimeerror(dummy_app):
     broken_string = 'wtfomg'
 
-    try:
-        name, arguments = dummy_app._check_and_parse_input_plugin(broken_string)
-        assert False
-    except RuntimeError:
-        assert True
+    with pytest.raises(RuntimeError):
+        dummy_app._check_and_parse_input_plugin(broken_string)
 
 
 def test_parsing_output_plugin_string_with_one_plugin_works(dummy_app):
@@ -52,11 +49,8 @@ def test_parsing_output_plugin_string_with_two_plugins_works(dummy_app):
 def test_parsing_broken_output_plugin_string_raises_runtimeerror(dummy_app):
     broken_string = 'wtfomg'
 
-    try:
+    with pytest.raises(RuntimeError):
         dummy_app._check_and_parse_output_plugin(broken_string)
-        assert False
-    except RuntimeError:
-        assert True
 
 
 def test_parsing_correct_matchmaker_works(dummy_app):
@@ -70,11 +64,8 @@ def test_parsing_correct_matchmaker_works(dummy_app):
 def test_parsing_broken_matchmaker_raises_runtimeerror(dummy_app):
     broken_string = 'extreme'
 
-    try:
+    with pytest.raises(RuntimeError):
         dummy_app._check_and_parse_matchmaker(broken_string)
-        assert False
-    except RuntimeError:
-        assert True
 
 
 def test_getting_csv_import_plugin_works(dummy_app):

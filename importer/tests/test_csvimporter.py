@@ -50,7 +50,7 @@ def test_importing_correct_csv_data_works(correct_csv_file):
     assert person.phone == '123456789'
     assert person.number == 1
     assert person.flags == MatchingFlags.no_flags
-    assert person.marked_numbers == set([2, 3])
+    assert person.marked_numbers == {2, 3}
     person = data[1]
     assert person.flags == MatchingFlags.match_all
 
