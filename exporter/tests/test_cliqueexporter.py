@@ -20,10 +20,10 @@ TEAM 1: 3 friends
 def testdata():
     basedata = people_testdata.testdata()
     tobi, sara, mark, luisa = basedata
-    tobi.results.matches = {sara, mark}
-    sara.results.matches = {tobi, mark}
-    mark.results.matches = {tobi, sara}
-    luisa.results.matches = {tobi}
+    tobi.results.clique = {sara, mark}
+    sara.results.clique = {tobi, mark}
+    mark.results.clique = {tobi, sara}
+    luisa.results.clique = {tobi}
     return basedata
 
 

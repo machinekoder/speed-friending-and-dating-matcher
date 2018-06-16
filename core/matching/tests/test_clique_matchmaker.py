@@ -18,7 +18,6 @@ def testdata():
     data.append(sara)
     data.append(mark)
     data.append(luisa)
-    #data.append(john)
     return data
 
 
@@ -32,7 +31,7 @@ def test_matchmaking_returns_correct_subset_of_data(matchmaker, testdata):
     matchmaker.run(testdata)
 
     tobi, sara, mark, luisa = testdata
-    assert tobi.results.matches == {sara, mark}
-    assert sara.results.matches == {tobi, mark}
-    assert mark.results.matches == {sara, tobi}
-    assert luisa.results.matches == {tobi}
+    assert tobi.results.clique == {sara, mark}
+    assert sara.results.clique == {tobi, mark}
+    assert mark.results.clique == {sara, tobi}
+    assert luisa.results.clique == {tobi}

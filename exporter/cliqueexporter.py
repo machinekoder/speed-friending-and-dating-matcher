@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 from .exporter import Exporter
-from .todoexporter import create_person_simple_string
+from .export_tools import create_person_simple_string
 
 
 HEADER = '''\
 Following cliques have been found:
+
 '''
 
-GROUP_TEMPLATE = '''
+GROUP_TEMPLATE = '''\
 TEAM {number}: {count} friends
 {friends}
 '''
@@ -42,7 +43,10 @@ class CliqueExporter(Exporter):
     def _extract_groups(all_people):
         groups = set()
         for person in all_people:
-            group = set(person.results.matches)
+            try:
+                group = set(person.results.clique)
+            except AttributeError:
+                continue
             if len(group) <= 1:
                 continue
             group.add(person)

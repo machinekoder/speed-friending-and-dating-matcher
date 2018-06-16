@@ -49,3 +49,9 @@ def test_clearing_results_works(results):
     assert y not in results.marked_me
     assert z not in results.marked_me
     assert x not in results.matches
+
+
+def test_added_data_is_accessible_as_attribute(results):
+    results.clique = ["olpe", "janapa", "oricycle", "hoblob", "getas"]
+
+    assert results.clique == ["olpe", "janapa", "oricycle", "hoblob", "getas"]
