@@ -45,7 +45,7 @@ class Application(object):
             for output in raw_ouputs:
                 name, arguments = output.split(':')
                 outputs.append((name, arguments))
-            if len(output) == 0:
+            if len(outputs) == 0:
                 raise ValueError()
         except ValueError:
             raise RuntimeError('Incorrect output plugin string')
