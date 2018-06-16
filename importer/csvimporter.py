@@ -23,13 +23,15 @@ class CsvImporter(Importer):
 
         return people
 
-    def _verify_row(self, row):
+    @staticmethod
+    def _verify_row(row):
         needed_rows = ['#', 'Name', 'Email', 'Phone', 'All', 'Interested']
         for need in needed_rows:
             if need not in row or row[need] is None:
                 raise ValueError('Row in CSV file does not contain required field: %s' % need)
 
-    def _parse_row(self, row):
+    @staticmethod
+    def _parse_row(row):
         if len(row) < 6:
             raise RuntimeError('Error parsing CSV line: to few arguments')
         nr = int(row['#'])
@@ -39,7 +41,10 @@ class CsvImporter(Importer):
         match_all = bool(int(row['All']))
         interested_in = set()
         for interest in row['Interested'].split(','):
-            interested_in.add(int(interest))
+            try:
+                interested_in.add(int(interest))
+            except ValueError:
+                continue
 
         if match_all:
             flags = MatchingFlags.match_all

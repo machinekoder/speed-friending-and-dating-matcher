@@ -38,6 +38,16 @@ def csv_file_with_incomplete_field(tmpdir):
     return str(csv_file)
 
 
+@pytest.fixture
+def csv_file_with_nobody_interested_in(tmpdir):
+    data = '''#;Name;Email;Phone;All;Interested
+1;Tobi;tobi@gmail.com;123456789;0;
+'''
+    csv_file = tmpdir.join('test.csv')
+    csv_file.write(data)
+    return str(csv_file)
+
+
 def test_importing_correct_csv_data_works(correct_csv_file):
     importer = CsvImporter(filename=correct_csv_file)
 
@@ -58,18 +68,22 @@ def test_importing_correct_csv_data_works(correct_csv_file):
 def test_importing_csv_file_without_header_raises_error(csv_file_without_header):
     importer = CsvImporter(filename=csv_file_without_header)
 
-    try:
+    with pytest.raises(ValueError):
         importer.import_data()
-        assert False
-    except ValueError:
-        assert True
 
 
 def test_importing_csv_file_with_incomplete_field_raises_error(csv_file_with_incomplete_field):
     importer = CsvImporter(filename=csv_file_with_incomplete_field)
 
-    try:
+    with pytest.raises(ValueError):
         importer.import_data()
-        assert False
-    except ValueError:
-        assert True
+
+
+def test_importing_csv_file_with_empty_interested_in_field_does_not_throw_error(csv_file_with_nobody_interested_in):
+    importer = CsvImporter(filename=csv_file_with_nobody_interested_in)
+
+    data = importer.import_data()
+
+    assert len(data) == 1
+    person = data[0]
+    assert person.marked_numbers == set()
