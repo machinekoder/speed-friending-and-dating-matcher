@@ -62,7 +62,4 @@ class TodoExporter(Exporter):
                                 'matches': '\n'.join(matches)}
 
 
-
-
-
 exporter = TodoExporter
