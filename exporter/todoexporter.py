@@ -4,22 +4,22 @@ from .export_tools import create_person_simple_string
 
 TEXT_TEMPLATE = '''\
 ============================
-Send to %(name)s, %(email)s, %(phone)s the following message:
+Send to {name}, {email}, {phone} the following message:
 
-Hi %(name)s, here are your contacts with people you can reach out to
+Hi {name}, here are your contacts with people you can reach out to
 (people that marked you with an "x" and you marked them with an "x"):
 
 You marked:
-%(marked)s
+{marked}
 
 You got marked by:
-%(got_marked)s
+{got_marked}
 
 Your matches:
-%(matches)s
+{matches}
 
 Your cliques:
-%(cliques)s
+{cliques}
 
 You can also find all other contacts here: http://goo.gl/123xyz
 or on meetup here: https://www.meetup.com/speed-friending-events/members/
@@ -60,11 +60,11 @@ class TodoExporter(CliqueExporter):
             CliqueExporter._create_group_string(group, i+1)
             for i, group in enumerate(groups)
         ]
-        return TEXT_TEMPLATE % {
-            'name': person.name, 'email': person.email, 'phone': person.phone,
-            'marked': '\n'.join(marked_by_me), 'got_marked': '\n'.join(marked_me),
-            'matches': '\n'.join(matches), 'cliques': '\n'.join(cliques),
-        }
+        return TEXT_TEMPLATE.format(
+            name=person.name, email=person.email, phone=person.phone,
+            marked='\n'.join(marked_by_me), got_marked='\n'.join(marked_me),
+            matches='\n'.join(matches), cliques='\n'.join(cliques),
+        )
 
     @staticmethod
     def _find_all_groups_for_person(person, groups):
