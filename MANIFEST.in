@@ -1,0 +1,3 @@
+include README.md
+recursive-include example *.py *.csv
+recursive-include speed_friending_matcher *.py *.html

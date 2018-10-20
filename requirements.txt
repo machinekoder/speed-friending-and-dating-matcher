@@ -1,7 +1,0 @@
-#
-# Runtime requirements
-#
-
-aenum>=1.4.5
-openpyxl>=2.5.0a2
-pydot
