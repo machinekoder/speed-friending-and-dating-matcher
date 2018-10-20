@@ -25,18 +25,13 @@ class CliqueExporter(Exporter):
         with open(self._filename, 'wt') as f:
             f.write(HEADER)
             for i, group in enumerate(groups):
-                f.write(self._create_group_string(group, i+1))
+                f.write(self._create_group_string(group, i + 1))
 
     @staticmethod
     def _create_group_string(group, number):
-        friend_strings = (
-            create_person_simple_string(friend)
-            for friend in group
-        )
+        friend_strings = (create_person_simple_string(friend) for friend in group)
         return GROUP_TEMPLATE.format(
-            number=number,
-            count=len(group),
-            friends='\n'.join(friend_strings)
+            number=number, count=len(group), friends='\n'.join(friend_strings)
         )
 
     @staticmethod

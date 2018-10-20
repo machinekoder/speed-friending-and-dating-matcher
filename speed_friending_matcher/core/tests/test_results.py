@@ -5,6 +5,7 @@ import pytest
 @pytest.fixture
 def results():
     from speed_friending_matcher.core.results import Results
+
     return Results()
 
 

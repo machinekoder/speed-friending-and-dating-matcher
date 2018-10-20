@@ -30,6 +30,7 @@ def testdata():
 @pytest.fixture
 def exporter(tmpdir):
     from speed_friending_matcher.exporter.cliqueexporter import CliqueExporter
+
     todo_file = tmpdir.join('clique.txt')
     return CliqueExporter(filename=str(todo_file))
 

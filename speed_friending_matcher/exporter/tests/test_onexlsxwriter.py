@@ -12,6 +12,7 @@ def testdata():
 @pytest.fixture
 def exporter(tmpdir):
     from speed_friending_matcher.exporter.onexlsxexporter import OneXlsxExporter
+
     test_file = tmpdir.join('test.xlsx')
     return OneXlsxExporter(filename=str(test_file))
 

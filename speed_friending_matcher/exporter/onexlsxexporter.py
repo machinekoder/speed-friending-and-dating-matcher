@@ -46,7 +46,7 @@ class OneXlsxExporter(Exporter):
         for i in range(num_particpants):
             column = len(elements) + i
             cell = worksheet[self._cell(0, column)]
-            cell.value = i+1
+            cell.value = i + 1
             cell.style = 'title'
 
         worksheet.column_dimensions["A"].width = 5
@@ -79,7 +79,7 @@ class OneXlsxExporter(Exporter):
             cell.style = 'anonymous'
         worksheet[self._cell(row, 4)] = self._matching_flags_to_string(person.flags)
         for other_person in person.results.marked_by_me:
-            worksheet[self._cell(row, 4+other_person.number)] = 'x'
+            worksheet[self._cell(row, 4 + other_person.number)] = 'x'
 
     def _matching_flags_to_string(self, flags):
         if flags == MatchingFlags.match_all:
@@ -88,7 +88,7 @@ class OneXlsxExporter(Exporter):
             return 'not all'
 
     def _cell(self, row, column):
-        return '%c%i' % (get_column_letter(column + 1), row+1)
+        return '%c%i' % (get_column_letter(column + 1), row + 1)
 
 
 exporter = OneXlsxExporter

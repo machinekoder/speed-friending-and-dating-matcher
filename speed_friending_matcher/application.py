@@ -4,10 +4,7 @@ import importlib
 
 
 class Application(object):
-    MATCHMAKERS = {
-        'simple': SimpleMatchmaker,
-        'clique': CliqueMatchmaker
-    }
+    MATCHMAKERS = {'simple': SimpleMatchmaker, 'clique': CliqueMatchmaker}
 
     def __init__(self, input_plugin, output_plugin, matchmaker):
         self._input_plugin = input_plugin
@@ -60,11 +57,15 @@ class Application(object):
     @staticmethod
     def _get_import_plugin(input_arguments):
         name, arguments = input_arguments
-        module = importlib.import_module('.importer.%simporter' % name, package='speed_friending_matcher')
+        module = importlib.import_module(
+            '.importer.%simporter' % name, package='speed_friending_matcher'
+        )
         return module.importer(arguments)
 
     @staticmethod
     def _get_export_plugin(output_arguments):
         name, arguments = output_arguments
-        module = importlib.import_module('.exporter.%sexporter' % name, package='speed_friending_matcher')
+        module = importlib.import_module(
+            '.exporter.%sexporter' % name, package='speed_friending_matcher'
+        )
         return module.exporter(arguments)

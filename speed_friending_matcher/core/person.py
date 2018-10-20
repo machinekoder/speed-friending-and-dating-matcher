@@ -9,7 +9,15 @@ class MatchingFlags(Flag):
 
 
 class Person(object):
-    def __init__(self, name, number, marked_numbers, flags=MatchingFlags.no_flags, email=None, phone=None):
+    def __init__(
+        self,
+        name,
+        number,
+        marked_numbers,
+        flags=MatchingFlags.no_flags,
+        email=None,
+        phone=None,
+    ):
         if type(flags) is not MatchingFlags:
             raise TypeError('Must use MatchingOptions')
 
@@ -58,4 +66,8 @@ class Person(object):
         return self._results
 
     def __repr__(self):
-        return 'Person (name: %s, number: %s, marked_numbers: %s)' % (self._name, self._number, self._marked_numbers)
+        return 'Person (name: %s, number: %s, marked_numbers: %s)' % (
+            self._name,
+            self._number,
+            self._marked_numbers,
+        )

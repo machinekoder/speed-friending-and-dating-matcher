@@ -83,10 +83,15 @@ def testdata():
 @pytest.fixture
 def exporter(tmpdir):
     from speed_friending_matcher.exporter.todoexporter import TodoExporter
+
     todo_file = tmpdir.join('todos.txt')
     return TodoExporter(filename=str(todo_file))
 
 
+def test_creating_todo_string_from_person_object_returns_correct_string(
+    testdata, exporter, expected_output
+):
+    output = exporter._create_person_todo_string(testdata[0])
 def test_creating_todo_string_from_person_object_returns_correct_string(testdata, exporter, expected_output1):
     output = exporter._create_person_todo_string(testdata[0], [])
 

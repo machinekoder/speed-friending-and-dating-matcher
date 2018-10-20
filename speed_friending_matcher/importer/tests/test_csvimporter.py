@@ -72,14 +72,18 @@ def test_importing_csv_file_without_header_raises_error(csv_file_without_header)
         importer.import_data()
 
 
-def test_importing_csv_file_with_incomplete_field_raises_error(csv_file_with_incomplete_field):
+def test_importing_csv_file_with_incomplete_field_raises_error(
+    csv_file_with_incomplete_field
+):
     importer = CsvImporter(filename=csv_file_with_incomplete_field)
 
     with pytest.raises(ValueError):
         importer.import_data()
 
 
-def test_importing_csv_file_with_empty_interested_in_field_does_not_throw_error(csv_file_with_nobody_interested_in):
+def test_importing_csv_file_with_empty_interested_in_field_does_not_throw_error(
+    csv_file_with_nobody_interested_in
+):
     importer = CsvImporter(filename=csv_file_with_nobody_interested_in)
 
     data = importer.import_data()
