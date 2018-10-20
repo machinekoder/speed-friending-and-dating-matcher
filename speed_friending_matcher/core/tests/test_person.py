@@ -19,7 +19,13 @@ def test_passing_non_flag_to_flags_raises_error():
 
 
 def test_passing_valid_flag_works():
-    person = Person(name='Deere', number=10, phone='911', flags=MatchingFlags.match_all, marked_numbers=set())
+    person = Person(
+        name='Deere',
+        number=10,
+        phone='911',
+        flags=MatchingFlags.match_all,
+        marked_numbers=set(),
+    )
 
     assert MatchingFlags.match_all in person.flags
 

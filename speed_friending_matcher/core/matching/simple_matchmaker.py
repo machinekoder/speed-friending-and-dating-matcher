@@ -17,7 +17,9 @@ class SimpleMatchmaker(object):
         for other_person in all_people:
             self._match_two_people(person, other_person)
 
-        person.results.matches = set.intersection(person.results.marked_by_me, person.results.marked_me)
+        person.results.matches = set.intersection(
+            person.results.marked_by_me, person.results.marked_me
+        )
 
     def _match_two_people(self, person, other_person):
         if person is other_person:

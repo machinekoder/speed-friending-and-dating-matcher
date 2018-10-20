@@ -28,7 +28,9 @@ class CsvImporter(Importer):
         needed_rows = ['#', 'Name', 'Email', 'Phone', 'All', 'Interested']
         for need in needed_rows:
             if need not in row or row[need] is None:
-                raise ValueError('Row in CSV file does not contain required field: %s' % need)
+                raise ValueError(
+                    'Row in CSV file does not contain required field: %s' % need
+                )
 
     @staticmethod
     def _parse_row(row):
@@ -51,7 +53,14 @@ class CsvImporter(Importer):
         else:
             flags = MatchingFlags.no_flags
 
-        person = Person(number=nr, name=name, email=email, phone=phone, flags=flags, marked_numbers=interested_in)
+        person = Person(
+            number=nr,
+            name=name,
+            email=email,
+            phone=phone,
+            flags=flags,
+            marked_numbers=interested_in,
+        )
         return person
 
 

@@ -17,6 +17,7 @@ def testdata():
 @pytest.fixture
 def exporter(tmpdir):
     from speed_friending_matcher.exporter.graphexporter import GraphExporter
+
     todo_file = tmpdir.join('out.raw')
     return GraphExporter(filename=str(todo_file))
 
@@ -27,8 +28,14 @@ def test_writing_output_to_file_works_as_expected(testdata, exporter):
     with open(exporter._filename, 'rt') as f:
         written = f.read()
 
-    assert any(l in written for l in ('Mark -- "Sara Mustermann";', '"Sara Mustermann" -- Mark;'))
+    assert any(
+        l in written
+        for l in ('Mark -- "Sara Mustermann";', '"Sara Mustermann" -- Mark;')
+    )
     assert any(l in written for l in ('Mark -- Tobi;', 'Tobi -- Mark;'))
     assert any(l in written for l in ('Luisa -- Tobi;', 'Tobi -- Luisa;'))
-    assert any(l in written for l in ('"Sara Mustermann" -- Tobi;', 'Tobi -- "Sara Mustermann";'))
+    assert any(
+        l in written
+        for l in ('"Sara Mustermann" -- Tobi;', 'Tobi -- "Sara Mustermann";')
+    )
     assert len(written.split('\n')) == 7

@@ -18,7 +18,6 @@ class CliqueMatchmaker(SimpleMatchmaker):
             self._find_biggest_clique_for_person(person)
 
     def _find_biggest_clique_for_person(self, person, **__):
-
         def dfs(graph, start):
             visited = set()
             stack = [(start, {start})]

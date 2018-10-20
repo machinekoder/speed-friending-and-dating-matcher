@@ -47,6 +47,7 @@ class TodoExporter(CliqueExporter):
     def _create_person_todo_string(person, groups):
         def sort(results):
             return sorted(results, key=lambda x: x.number)
+
         marked_by_me = []
         for p in sort(person.results.marked_by_me):
             marked_by_me.append(create_person_simple_string(p))

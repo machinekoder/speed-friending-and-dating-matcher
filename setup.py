@@ -12,7 +12,6 @@ setup(
     name='speed-friending-matcher',
     version='0.1',
     packages=['speed_friending_matcher'],
-    #package_dir={'': ''},
     url='https://github.com/machinekoder/speed-friending-matcher/',
     license='MIT',
     author='Alexander Rössler',
