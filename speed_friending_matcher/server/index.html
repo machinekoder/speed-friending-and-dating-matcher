@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css"> </head>
+
+<body>
+<form class="" action = "./convert" method = "POST" enctype = "multipart/form-data">
+  <div class="p-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="display-4">
+            <b style="font-weight: bold;">Speed Friending</b>
+            <i>Tools</i>
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="">Convert &amp; Export the todo.txt from google forms CSV file.</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ol class="">
+            <li>
+              <b>Import </b>"Google Forms" Spreadsheet .csv file.
+              <i>(File that is
+                <a target="_blank" href="https://docs.google.com/forms/u/0/">created here</a>)</i>
+              <br>IMPORTANT: Avoid errors from badly formatted CSV files, go ahead and download this example CSV file&nbsp;to see how it's done</li>
+            <li>Make sure the
+              <b>Form </b>below is formatted as you need it.
+              <i>(See example from the
+                <a target="_blank" href="https://github.com/machinekoder/speed-friending-and-dating-matcher/tree/master/example">speed friending match software</a>)</i>
+            </li>
+            <li>Click the
+              <b>Export </b>Button to run the script and let it do it's magic.
+              <i>(Example output file
+                <a target="_blank" href="https://pastebin.com/raw/Gu15YJ8a">could look like that</a>)</i>
+              <br>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p class="lead">1. Import</p>
+          <div class="col-md-12">
+		  <i class="fa fa-fw fa-cloud-upload"></i> <label>Select <code>EVENT_CONTACTS.csv</code> File</label><br>
+		  <input type = "file" name = "file">
+            
+              
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10">
+          <p class="lead">2. Form</p>
+		  <p class="">You can use <mark>{name}</mark>, <mark>{email}</mark>, <mark>{phone}</mark>, <mark>{got_marked}</mark>, <mark>{matches}</mark> & <mark>{cliques}</mark> to format your message for the todo.txt list.<br>Please replace "<b>YOUR NAME</b>" with your name or nickname - Same goes for "<b>https://fb.com/yourpagename/</b>"</p>
+          
+            <div class="form-group">
+              <textarea class="form-control form-control-sm" name="template" rows="25">============================
+Send to {name}, {email}, {phone} the following message:
+
+Hi {name}, It's YOUR NAME (Speed Friending Organizer).
+
+Here are your matching friends contact information!
+Don’t be afraid to reach out to them even if you don’t quite remember them.
+Don't wait for them to reach out to you!
+
+You got marked by:
+{got_marked}
+
+Your matches (You marked each other!):
+{matches}
+
+Your cliques (You all marked each other!):
+{cliques}
+
+Remember: Do the first step!
+Join our Facebook group to receive notifications about future events!
+https://fb.com/yourpagename/
+
+Cheers,
+YOUR NAME :)</textarea>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p class="lead">3. Export</p>
+          <div class="col-md-12">
+			<i class="fa fa-fw fa-cloud-download"></i> <label>Download <code>EVENT_CONTACTS_TODO.txt</code> File</label><br>
+			<input type = "submit"/> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5 bg-dark text-white my-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mt-3 text-center">
+          <p>
+            <u>No Data is saved on the Server</u>&nbsp;- Files are deleted right after conversion.
+            <br>
+            <b>We are fully GDPR Compliant, no tracking is active on this site.
+              <br>
+            </b>
+            <a target="_blank" href="https://speedfriending.at">www.speedfriending.at</a>
+            <br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ </form> 
+</body>
+
+</html>
