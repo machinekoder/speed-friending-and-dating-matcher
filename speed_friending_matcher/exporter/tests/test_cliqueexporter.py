@@ -32,7 +32,7 @@ def exporter(tmpdir):
     from speed_friending_matcher.exporter.cliqueexporter import CliqueExporter
 
     todo_file = tmpdir.join('clique.txt')
-    return CliqueExporter(filename=str(todo_file))
+    return CliqueExporter(output_filename=str(todo_file))
 
 
 def test_writing_output_to_file_works_as_expected(testdata, exporter, expected_output):

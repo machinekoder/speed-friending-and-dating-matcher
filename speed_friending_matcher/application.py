@@ -28,7 +28,9 @@ class Application(object):
     @staticmethod
     def _check_and_parse_input_plugin(string):
         try:
-            name, arguments = string.split(':')
+            name, *arguments = string.split(':')
+            if len(arguments) == 0:
+                raise ValueError()
         except ValueError:
             raise RuntimeError('Incorrect input plugin string')
 
@@ -37,11 +39,13 @@ class Application(object):
     @staticmethod
     def _check_and_parse_output_plugin(string):
         try:
-            raw_ouputs = string.split(';')
+            raw_outputs = string.split(';')
             outputs = []
-            for output in raw_ouputs:
-                name, arguments = output.split(':')
+            for output in raw_outputs:
+                name, *arguments = output.split(':')
                 outputs.append((name, arguments))
+                if len(arguments) == 0:
+                    raise ValueError()
             if len(outputs) == 0:
                 raise ValueError()
         except ValueError:
@@ -60,7 +64,7 @@ class Application(object):
         module = importlib.import_module(
             '.importer.%simporter' % name, package='speed_friending_matcher'
         )
-        return module.importer(arguments)
+        return module.importer(*arguments)
 
     @staticmethod
     def _get_export_plugin(output_arguments):
@@ -68,4 +72,5 @@ class Application(object):
         module = importlib.import_module(
             '.exporter.%sexporter' % name, package='speed_friending_matcher'
         )
-        return module.exporter(arguments)
+        print('arguments', arguments)
+        return module.exporter(*arguments)
