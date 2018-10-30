@@ -21,7 +21,7 @@ pip install speed-friending-matcher
 ## How to use it
 Run the speed-friending-matcher from the command line:
 ```
-usage: speed_friending_matcher [-h] -i INPUT -o OUTPUT [-m MATCHMAKER]
+usage: speed_friending_matcher [-h] -i INPUT -o OUTPUT [-m MATCHMAKER] [-s]
 
 Matchmaking application for speed friending events
 
@@ -33,6 +33,7 @@ optional arguments:
                         Output plugins and parameters e.g. todo:mytodo.txt
   -m MATCHMAKER, --matchmaker MATCHMAKER
                         Matchmaker, simple or clique
+  -s, --server          Starts a local webserver with a web GUI.
 ```
 
 For example:
