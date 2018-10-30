@@ -85,7 +85,7 @@ def exporter(tmpdir):
     from speed_friending_matcher.exporter.todoexporter import TodoExporter
 
     todo_file = tmpdir.join('todos.txt')
-    return TodoExporter(filename=str(todo_file))
+    return TodoExporter(output_filename=str(todo_file))
 
 
 def test_creating_todo_string_from_person_object_returns_correct_string(

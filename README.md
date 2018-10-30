@@ -46,10 +46,28 @@ speed_friending_matcher -i csv:example/sample.csv -o todo:test.txt
 
 ## Exporter Plugins
 
-* **todo:<filename>.txt:** exports a TODO file
-* **onexlsx:<filename>.xlsx:** exports a single Excel sheet containing matching information
-* **clique:<filename>.txt:** exports a file containing all found cliques, to be used with the clique matchmaker
-* **graph:<filename>.<png, dot, ...>** exports a graphical representation of the match graph, supports any export formats supported by [GraphViz](https://www.graphviz.org/)
+`[]` means optional
+
+* todo - exports a TODO file
+```
+todo:<filename>.txt:[<template_filename>.txt]
+```
+
+* onexlsx - exports a single Excel sheet containing matching information
+```
+onexlsx:<filename>.xlsx
+```
+
+* clique - exports a file containing all found cliques, to be used with the clique matchmaker
+```
+clique:<filename>.txt:[<header_filename>.txt]:[<template_filename.txt]
+```
+
+* graph - exports a graphical representation of the match graph, supports any export formats supported by [GraphViz](https://www.graphviz.org/)
+```
+graph:<filename>.<png, dot, ...>
+```
+
 
 ## Matchmakers
 

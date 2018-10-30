@@ -28,9 +28,20 @@ or on meetup here: https://www.meetup.com/speed-friending-events/members/
 
 
 class TodoExporter(CliqueExporter):
-    def __init__(self, filename):
-        super(TodoExporter, self).__init__(filename)
-        self._groups = []
+    def __init__(self, output_filename, template_filename=None):
+        """
+        This exporter plugin creates a list of to do tasks for each user.
+        :param output_filename: Name of the output txt file which will be generated.
+        :param template_filename: Name of an optional template file describing the output format.
+        """
+        super(TodoExporter, self).__init__(output_filename)
+        self._filename = output_filename
+
+        if template_filename:
+            with open(template_filename, 'rt') as f:
+                self._text_template = f.read()
+        else:
+            self._text_template = TEXT_TEMPLATE
 
     def export_data(self, data):
         self._groups = self._extract_groups(data)
@@ -43,8 +54,7 @@ class TodoExporter(CliqueExporter):
         groups = self._sort_groups_from_biggest(groups)
         todo_file.write(self._create_person_todo_string(person, groups))
 
-    @staticmethod
-    def _create_person_todo_string(person, groups):
+    def _create_person_todo_string(self, person, groups):
         def sort(results):
             return sorted(results, key=lambda x: x.number)
 
@@ -61,7 +71,7 @@ class TodoExporter(CliqueExporter):
             CliqueExporter._create_group_string(group, i+1)
             for i, group in enumerate(groups)
         ]
-        return TEXT_TEMPLATE.format(
+        return self._text_template.format(
             name=person.name, email=person.email, phone=person.phone,
             marked='\n'.join(marked_by_me), got_marked='\n'.join(marked_me),
             matches='\n'.join(matches), cliques='\n'.join(cliques),
