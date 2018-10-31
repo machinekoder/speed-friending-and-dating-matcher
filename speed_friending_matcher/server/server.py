@@ -42,11 +42,14 @@ def upload_file():
             return send_file(result_file)  # 'file uploaded successfully'
 
 
-def start_server(input_plugin, output_plugin, matchmaker):
+def configure(input_plugin, output_plugin, matchmaker):
     global _input_plugin
     global _output_plugin
-    global  _matchmaker
+    global _matchmaker
     _input_plugin = input_plugin
     _output_plugin = output_plugin
     _matchmaker = matchmaker
+
+
+def start():
     app.run(debug=DEBUG)

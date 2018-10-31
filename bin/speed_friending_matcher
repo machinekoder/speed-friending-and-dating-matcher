@@ -2,7 +2,7 @@
 import argparse
 import sys
 from speed_friending_matcher.application import Application
-from speed_friending_matcher.server import start_server
+from speed_friending_matcher import server
 
 
 def main():
@@ -24,11 +24,12 @@ def main():
         app.process()
         sys.exit(0)
     else:
-        start_server(
+        server.configure(
             input_plugin=args.input,
             output_plugin=args.output,
             matchmaker=args.matchmaker,
         )
+        server.start()
 
 
 if __name__ == '__main__':
