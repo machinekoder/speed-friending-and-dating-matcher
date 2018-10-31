@@ -69,11 +69,33 @@ clique:<filename>.txt:[<header_filename>.txt]:[<template_filename.txt]
 graph:<filename>.<png, dot, ...>
 ```
 
-
 ## Matchmakers
 
 * **simple:** Simple I liked you, you liked me matchmaking
 * **clique:** Finds cliques of people liking each other
 
+## Run on your Server
+
+The application can be started in server mode with the optional command line argument `-s`.
+However, please be aware that this starts a development server which is not recommended
+to be used for production.
+
+If you want to run the application on your webserver please refer to 
+the [WSGI Guide for Flask.](http://flask.pocoo.org/docs/1.0/deploying/mod_wsgi/)
+
+The `.wsgi` file for Flask could look as follows:
+
+```python
+from speed_friending_matcher import server
+from speed_friending_matcher.server import app as application
+
+server.configure(
+  input_plugin='csv:{}',
+  output_plugin='todo:{}:{}',
+  matchmaker='simple'
+)
+```
+
 ## Extending the software
-You can extend the software by adding new import and export plugins. Take a look the default plugins [csvimporter](./importer/csvimporter.py) and [todoexporter](./exporter/todoexporter.py) for more details.
+You can extend the software by adding new import and export plugins. Take a look the default plugins
+ [csvimporter](./importer/csvimporter.py) and [todoexporter](./exporter/todoexporter.py) for more details.
