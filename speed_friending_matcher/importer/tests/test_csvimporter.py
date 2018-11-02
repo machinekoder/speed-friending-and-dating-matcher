@@ -1,3 +1,4 @@
+# coding=utf-8
 import pytest
 from speed_friending_matcher.importer.csvimporter import CsvImporter
 from speed_friending_matcher.core.person import MatchingFlags

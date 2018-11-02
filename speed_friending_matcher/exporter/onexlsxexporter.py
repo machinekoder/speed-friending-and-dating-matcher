@@ -1,3 +1,4 @@
+# coding=utf-8
 from .exporter import Exporter
 from ..core.person import MatchingFlags
 from openpyxl import Workbook
