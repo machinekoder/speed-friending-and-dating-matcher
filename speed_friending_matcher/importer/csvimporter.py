@@ -1,3 +1,4 @@
+# coding=utf-8
 import csv
 from .importer import Importer
 from ..core.person import Person, MatchingFlags

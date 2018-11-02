@@ -89,10 +89,8 @@ def exporter(tmpdir):
 
 
 def test_creating_todo_string_from_person_object_returns_correct_string(
-    testdata, exporter, expected_output
+    testdata, exporter, expected_output1
 ):
-    output = exporter._create_person_todo_string(testdata[0])
-def test_creating_todo_string_from_person_object_returns_correct_string(testdata, exporter, expected_output1):
     output = exporter._create_person_todo_string(testdata[0], [])
 
     assert output == expected_output1

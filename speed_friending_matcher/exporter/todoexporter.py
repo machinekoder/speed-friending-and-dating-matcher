@@ -36,6 +36,7 @@ class TodoExporter(CliqueExporter):
         """
         super(TodoExporter, self).__init__(output_filename)
         self._filename = output_filename
+        self._groups = []
 
         if template_filename:
             with open(template_filename, 'rt') as f:
@@ -68,21 +69,21 @@ class TodoExporter(CliqueExporter):
         for p in sort(person.results.matches):
             matches.append(create_person_simple_string(p))
         cliques = [
-            CliqueExporter._create_group_string(group, i+1)
-            for i, group in enumerate(groups)
+            self._create_group_string(group, i + 1) for i, group in enumerate(groups)
         ]
         return self._text_template.format(
-            name=person.name, email=person.email, phone=person.phone,
-            marked='\n'.join(marked_by_me), got_marked='\n'.join(marked_me),
-            matches='\n'.join(matches), cliques='\n'.join(cliques),
+            name=person.name,
+            email=person.email,
+            phone=person.phone,
+            marked='\n'.join(marked_by_me),
+            got_marked='\n'.join(marked_me),
+            matches='\n'.join(matches),
+            cliques='\n'.join(cliques),
         )
 
     @staticmethod
     def _find_all_groups_for_person(person, groups):
-        return [
-            group for group in groups
-            if person in group
-        ]
+        return [group for group in groups if person in group]
 
 
 exporter = TodoExporter
