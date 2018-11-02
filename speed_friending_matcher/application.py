@@ -76,5 +76,4 @@ class Application(object):
         module = importlib.import_module(
             '.exporter.%sexporter' % name, package='speed_friending_matcher'
         )
-        print('arguments', arguments)
         return module.exporter(*arguments)
