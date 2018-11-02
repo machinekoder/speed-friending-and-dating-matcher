@@ -28,7 +28,9 @@ class Application(object):
     @staticmethod
     def _check_and_parse_input_plugin(string):
         try:
-            name, *arguments = string.split(':')
+            split = string.split(':')
+            name = split[0]
+            arguments = split[1:]
             if len(arguments) == 0:
                 raise ValueError()
         except ValueError:
@@ -42,7 +44,9 @@ class Application(object):
             raw_outputs = string.split(';')
             outputs = []
             for output in raw_outputs:
-                name, *arguments = output.split(':')
+                split = output.split(':')
+                name = split[0]
+                arguments = split[1:]
                 outputs.append((name, arguments))
                 if len(arguments) == 0:
                     raise ValueError()
