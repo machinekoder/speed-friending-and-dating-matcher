@@ -81,20 +81,16 @@ However, please be aware that this starts a development server which is not reco
 to be used for production.
 
 If you want to run the application on your webserver please refer to 
-the [WSGI Guide for Flask.](http://flask.pocoo.org/docs/1.0/deploying/mod_wsgi/)
+the [WSGI Guide for Flask.](http://flask.pocoo.org/docs/1.0/deploying/mod_wsgi/) or 
+use [gunicorn](https://gunicorn.org/).
 
-The `.wsgi` file for Flask could look as follows:
-
-```python
-from speed_friending_matcher import server
-from speed_friending_matcher.server import app as application
-
-server.configure(
-  input_plugin='csv:{}',
-  output_plugin='todo:{}:{}',
-  matchmaker='simple'
-)
+For example:
+```bash
+pip3 install gunicorn --user
+gunicorn -w 4 wsgi:application
 ```
+
+Use your Apache or other webservers `.htaccess` to forward the port.
 
 ## Extending the software
 You can extend the software by adding new import and export plugins. Take a look the default plugins
