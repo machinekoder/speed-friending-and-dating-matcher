@@ -92,6 +92,134 @@ gunicorn -w 4 wsgi:application
 
 Use your Apache or other webservers `.htaccess` to forward the port.
 
+### Detailed instructions
+
+The following instructions were tested on a server with root access.
+
+If you are running these steps in a production environment, make sure you have a back-up in place. I'm not responsible for any damages or losses.
+
+If you have a webmaster, let your webmaster do the job.
+
+#### Ensure Python and pip are installed
+
+1. Open a root terminal on your server
+2. Check if Python is installed
+
+```bash
+which python
+```
+
+Should return something along the lines of
+
+```
+/usr/bin/python
+```
+
+If not please refer to your web hosts manual for installing Python.
+
+3. Check if pip is installed
+
+```bash
+which pip
+```
+
+Should return 
+
+```
+/usr/bin/pip
+```
+
+If not you can install pip with the `get-pip.py` script.
+
+```bash
+wget https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
+rm get-pip.py
+```
+
+4. Install the Python dependencies
+
+```bash
+pip install gunicorn aenum flask
+```
+
+#### Set-up the Script
+
+1. Log in with your user account
+
+Either via the root shell `su - <username>` or via your webhosts login shell.
+
+2. Download the speed-friending matcher
+
+```bash
+cd ~
+mdkir repos
+cd repos
+git clone https://github.com/machinekoder/speed-friending-and-dating-matcher.git
+``
+
+3. Create a start script
+
+```bash
+cd ~
+mkdir scripts
+cd scripts
+nano start-speed-friending-matcher.sh
+```
+
+```
+
+#!/bin/bash
+pgrep -x gunicorn
+if [ $? -ne 0 ]; then
+cd ~/repos/speed-friending-and-dating-matcher
+gunicorn -w 4 wsgi:application -b localhost:5000
+fi
+```
+
+```bash
+chmod +x start-speed-friending-matcher.sh
+```
+
+4. Set up crontab to start the script
+
+```bash
+crontab -e
+```
+
+Insert
+
+```
+* * * * * ~/scripts/start-speed-friending-matcher.sh
+```
+
+Now wait one minute and your server should be up and running.
+
+
+#### Configure Apache
+
+Use the `.htaccess` of your website to create a `RewriteRule` to the running `gunicorn` instance.
+
+In this example we place the speed-friending script on the route `/script/*`, every other route is redirected to `/index.php`.
+
+```.htaccess
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^script/(.*)$ http://localhost:5000/$1 [P,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ /index.php [L]
+</IfModule>
+```
+
+#### Stopping everything
+
+First, you need to remove the start script from crontab `crontab -e`.
+
+Then kill all running gunicorn instances `killall gunicorn`.
+
+
 ## Extending the software
 You can extend the software by adding new import and export plugins. Take a look the default plugins
  [csvimporter](./importer/csvimporter.py) and [todoexporter](./exporter/todoexporter.py) for more details.
