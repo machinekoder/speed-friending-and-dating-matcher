@@ -1,6 +1,7 @@
 # coding=utf-8
 import os
 import shutil
+import codecs
 from tempfile import mkdtemp
 
 from flask import Flask, request, send_file
@@ -16,10 +17,10 @@ _matchmaker = ''
 app = Flask(__name__)
 
 
-@app.route('/')
-def upload_template():
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
     return send_file('index.html')
-
 
 @app.route('/convert', methods=['GET', 'POST'])
 def upload_file():
@@ -31,7 +32,7 @@ def upload_file():
             file_data.save(input_file)
             template = request.form['template']
             template_file = os.path.join(tmp_dir, 'template.txt')
-            with open(template_file, 'wt') as f:
+            with codecs.open(template_file, 'w',  encoding="utf-8") as f:
                 f.write(template)
 
             result_file = os.path.join(tmp_dir, 'output.txt')
