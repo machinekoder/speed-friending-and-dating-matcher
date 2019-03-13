@@ -1,13 +1,14 @@
 # coding=utf-8
 import os
-from tempfile import TemporaryDirectory
+import shutil
+from tempfile import mkdtemp
 
 from flask import Flask, request, send_file
 from werkzeug.utils import secure_filename
 
 from ..application import Application
 
-DEBUG = False
+DEBUG = True
 
 _input_plugin = ''
 _output_plugin = ''
@@ -23,7 +24,8 @@ def upload_template():
 @app.route('/convert', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        with TemporaryDirectory() as tmp_dir:
+        tmp_dir = mkdtemp()
+        try:
             file_data = request.files['file']
             input_file = os.path.join(tmp_dir, secure_filename(file_data.filename))
             file_data.save(input_file)
@@ -40,7 +42,9 @@ def upload_file():
             )
             application.process()
 
-            return send_file(result_file)  # 'file uploaded successfully'
+            return send_file(result_file)  # 'file uploaded successfully'         
+        finally:
+            shutil.rmtree(tmp_dir)
 
 
 def configure(input_plugin, output_plugin, matchmaker):
