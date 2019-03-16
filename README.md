@@ -100,6 +100,8 @@ If you are running these steps in a production environment, make sure you have a
 
 If you have a webmaster, let your webmaster do the job.
 
+Ezyatev created an alternative [guide for CentOS 7.6 with Apache server](https://gist.github.com/ezyatev/4f8be8618e610d0413883d33278bc6fa).
+
 #### Ensure Python and pip are installed
 
 1. Open a root terminal on your server
