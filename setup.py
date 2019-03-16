@@ -10,7 +10,7 @@ with open(path.join(this_directory, 'README.md')) as f:
 
 setup(
     name='speed-friending-matcher',
-    version='0.1',
+    version='0.1.1',
     packages=['speed_friending_matcher'],
     url='https://github.com/machinekoder/speed-friending-matcher/',
     license='MIT',
